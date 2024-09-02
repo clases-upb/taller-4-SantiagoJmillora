@@ -9,10 +9,41 @@ public class App {
     
 
     public static void main(String[] args) {
-        
         //Coloque los llamados a cada función de acuerdo con cada enunciado
         //codifique el control de errores para el main
+        try {
+            
+            System.out.println("Contador Impares " + ContadorImpares(135));
+            System.out.println();
 
+            System.out.println("Serie Fibonacci " + Fibonacci(10));
+            System.out.println();
+            
+            System.out.println("Calcular raiz cuadrada " + CalcularRaiz());
+            System.out.println();
+        
+            //En el main, antes de invocar la función, se debe calcular un aleatorio entre 20 y 30 el cual establecerá la cantidad 
+            //de veces que va a llamar a la función y en un ciclo, mostrar los resultados.
+            
+            final byte max_random = 30, min_random = 20, constante_suma = 1;
+
+            int aleatorio = 0;
+            aleatorio = new Random().nextInt(max_random - min_random + constante_suma) + min_random;
+
+            System.out.println("Se va a calcular la raiz " + aleatorio + " veces.");
+
+            for(int i = 0; i < aleatorio; i++){
+                System.out.println("Calcular raiz: " + CalcularRaiz());
+            } 
+            
+            System.out.println("Generador de pares " + GenerarPares(5, 10));
+            
+            System.out.println("Sumatoria de aleatorios " + Sumatoria_aleatorios(5));
+            
+            System.out.println("LOTERIA " + Loteria());
+        } catch (Exception e) {
+            return;
+        }
 
     }
 
@@ -25,14 +56,62 @@ public class App {
      * hasta ese número separados por comas en grupos de hasta 8 números.
      * 
     */
+    public static String ContadorImpares(int num){
+        try {
+            final short condicion_menor = 100, condicion_mayor = 500;
+            short contador = 0;
+            String msj_return = "";
 
+            if(condicion_menor <= num && num <= condicion_mayor){
+
+                for(int i = 1; i <= num; i++){
+                    
+                    if(i%2 != 0){
+                        System.out.print(msj_return = (i + ", "));                    
+                        contador++;
+                    } else if(contador == 8){
+                        System.out.println("");
+                        contador = 0;
+                    }
+
+                     
+                }
+            } else {
+                msj_return = "Ocurrio un error con el numero introducido";
+            }
+
+            return msj_return;
+        } catch (Exception e) {
+            return "Ocurrio un error";
+        }
+    }
     /* 2. 	Escriba una función que reciba un entero N mayor de 2  y retorne un string cono esos N términos de la 
     serie de Fibonacci (La sucesión de Fibonacci se trata de una serie infinita de números naturales que empieza con un 0 y un 1 
     y continúa añadiendo números que son la suma de los dos anteriores: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 
     987, 1597…)
-     * 
-     * 
     */
+    public static String Fibonacci(int num){
+        try {
+            if(num < 2)
+                return "El numero debe ser mayor a dos";
+
+            int anterior = 0, posterior = 1, resultado = 0;
+            String msj_salida = "";
+
+            for(int i = 3; i <= num; i++){
+                
+                resultado = posterior + anterior;
+                System.out.print(msj_salida = (resultado + " ,"));
+                
+                anterior = posterior;
+                posterior = resultado;
+            }
+
+            return msj_salida;
+        } catch (Exception e) {
+            return "Ocurrio un error inesperado";
+        }
+    }
 
     /* 
      * 3.	Diseñar y desarrollar una función que NO reciba datos de entrada, genere aleatoriamente un número entre 2 y 355, 
@@ -40,9 +119,25 @@ public class App {
 
        En el main, antes de invocar la función, se debe calcular un aleatorio entre 20 y 30 el cual establecerá la cantidad 
        de veces que va a llamar a la función y en un ciclo, mostrar los resultados.
-
     */
+    public static double CalcularRaiz(){
+        try {
 
+            final byte min = 2, constante_suma = 1;
+            final short max = 355;
+
+            int valor_hallar = 0;
+            double resultado = 0;
+
+            valor_hallar = new Random().nextInt(max - min + constante_suma) + min;  
+            resultado = Math.sqrt(valor_hallar);
+
+            return resultado;
+
+        } catch (Exception e) {
+            return -1;
+        }
+    }
 
 
 
@@ -52,7 +147,33 @@ public class App {
 
         Llame la función desde el main e imprimir el resultado arrojado.
     */
+    public static String GenerarPares(int num_inicial, int num_final){
+        try {
+            int contador = 0, aleatorio = 0;
+            String msj_retornar = "";
 
+            if(num_inicial > num_final)
+
+                return "El numero inicial debe ser menor al numero final para el rango";
+
+            else{
+
+                for(int i = 0; i < 900; i++){
+
+                    aleatorio = new Random().nextInt(num_final- num_inicial + 1) + num_inicial;
+
+                    if(aleatorio%2 == 0){
+                        contador++;
+                        System.out.println(msj_retornar = ("Se generaron " + contador + " numeros pares"));
+                    } else System.out.print("");
+                }
+            }
+
+            return msj_retornar;
+        } catch (Exception e) {
+            return "Ocurrio un error inesperado";
+        }
+    }
 
 
 
@@ -60,9 +181,28 @@ public class App {
         y los sume.  La función deberá retornar el total de la suma. Usted defina los rangos que va a usar en el cálculo.
 
         Llame la función desde el main e imprimir el resultado arrojado.
-
-      
     */
+    public static int Sumatoria_aleatorios(int cantidad_num_aleatorios){
+        try {
+            final byte mayor = 100, menor = 1, menor_mas_uno = menor + 1;
+            int resultado = 0, aleatorio = 0;
+
+            for(int i = 0; i < cantidad_num_aleatorios; i++){
+
+                aleatorio = new Random().nextInt(mayor - menor + menor_mas_uno);
+
+                resultado = resultado + aleatorio;
+                System.out.println(resultado);
+            }
+
+
+            return resultado;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+
 
 
     /* 6.	Se requiere una función para simular el sorteo de una lotería, de acuerdo con las siguientes condiciones:
@@ -80,7 +220,7 @@ public class App {
 
             Ejm: Sorteo # 19  - Número Premiado 5698 - Serie 101
 
-            Para tener en cuenta la forma en la cual se informan los 20 resultados: 
+            Para tener en cuenta la forma en la cual se informan los 20 resultados:  
 
             Del premio 20 al 6 el programa imprime: 
 
@@ -98,11 +238,44 @@ public class App {
             Nota: para sacar el premio mayor calcule el random por cada número, como lo hacen en la realidad los sorteos.
 
             La función no recibe parámetros y devuelve un string con toda la lista de premios. El main, invoca la función 
-            e imprime el resultado que esta arroje. 
-
-
-     * 
-     * 
+            e imprime el resultado que esta arroje.  
     */
+
+        public static String Loteria(){
+            try {
+                final byte  cant_loteria = 20;
+                byte contador = 0;
+                final int max_premio = 9999, min_premio = 0000, min_serie = 100, max_serie = 150, menor_mas_uno_serie = min_serie + 1, menor_mas_uno_premio = min_premio + 1;
+                int premio = 0, serie = 0;
+                String msjLoteria = "";
+
+                for(int i = 1; i <= cant_loteria; i++){
+
+                    premio = new Random().nextInt(max_premio - min_premio + menor_mas_uno_premio);
+                    serie = new Random().nextInt(max_serie - min_serie + menor_mas_uno_serie);
+                    contador++;
+                        if(contador == 1){
+                            //Sorteo # 19  - Número Premiado 5698 - Serie 101
+                            System.out.println("======PREMIO MAYOR=========");
+                            System.out.println("Sorteo # " + i + " - Numero premiado " + premio + " - Serie " + serie);
+                        } else if(contador <= 5 && contador >= 2){
+                            if(contador == 2)
+                                System.out.println("======PREMIOS SECOS=========");
+
+                            System.out.println("Sorteo # " + i + " - Numero premiado " + premio + " - Serie " + serie);
+                        } else {
+                            if(contador == 6)
+                                System.out.println("======PREMIOS MENORES=======");
+                            System.out.println("Sorteo # " + i + " - Numero premiado " + premio + " - Serie " + serie);
+                        }
+                    
+                }
+
+
+                return msjLoteria;
+            } catch (Exception e) {
+                return "Ocurrio un error";
+            }
+        }
 
 }
